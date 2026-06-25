@@ -39,13 +39,13 @@ export function LoginForm({
 
     try {
       const data = await login(email, password);
+
       if (data && data.token) {
         localStorage.setItem("token", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user || {
-          name: "Alex Mercer",
-          email: email,
-          role: "Chief Librarian"
-        }));
+        localStorage.setItem("user", JSON.stringify(data.data));
+
+        //set delay for spping
+        await new Promise(resolve => setTimeout(resolve, 2000));
         navigate('/dashboard');
       }
     } catch (error: unknown) {
@@ -53,13 +53,13 @@ export function LoginForm({
       const message = (error as { response?: { data?: { message?: string } } }).response?.data?.message;
       setErrorMessage(message || "Failed to connect. Please try again.");
     } finally {
-      setIsLoading(false);
+        setIsLoading(false);
     }
   }
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card className="border-none shadow-none bg-transparent">
+      <Card className="border-none shadow-none bg-transparent p-6">
         <CardHeader className="text-left px-0 pb-6">
           <CardTitle className="text-3xl font-extrabold tracking-tight text-slate-900">
             Welcome Back
@@ -93,14 +93,14 @@ export function LoginForm({
                     Forgot password?
                   </a>
                 </div>
-                <Input 
-                  id="password" 
-                  type="password" 
-                  value={password} 
-                  onChange={(e) => setPassword(e.target.value)} 
+                <Input
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="h-11 px-4 text-sm bg-slate-50/50 hover:bg-slate-50 border-slate-200 focus:border-purple-500 focus:bg-white transition-all rounded-xl shadow-xs" 
-                  required 
+                  className="h-11 px-4 text-sm bg-slate-50/50 hover:bg-slate-50 border-slate-200 focus:border-purple-500 focus:bg-white transition-all rounded-xl shadow-xs"
+                  required
                 />
               </Field>
 
@@ -109,7 +109,7 @@ export function LoginForm({
                   {errorMessage}
                 </p>
               )}
-              
+
               <Field className="gap-3 mt-2">
                 <Button type="submit" className="h-11 w-full text-sm font-semibold cursor-pointer bg-purple-600 hover:bg-purple-700 text-white rounded-xl shadow-md shadow-purple-100 hover:shadow-lg hover:shadow-purple-200 transition-all">
                   {
@@ -117,14 +117,14 @@ export function LoginForm({
                       <>
                         <Spinner className="mr-2 h-4 w-4" />
                         Signing in...
-                      </>) 
+                      </>)
                       : ("Sign In")
                   }
                 </Button>
                 <Button variant="outline" type="button" className="h-11 w-full text-sm font-medium cursor-pointer border-slate-200 hover:bg-slate-50 rounded-xl transition-all">
                   Sign in with Google
                 </Button>
-                
+
                 <div className="mt-4 p-3 bg-purple-50/50 border border-purple-100 rounded-xl text-xs text-purple-700 leading-relaxed">
                   <span className="font-bold">Demo Login:</span> Use <span className="font-mono bg-purple-100/80 px-1 py-0.5 rounded">admin@library.com</span> (any password) to test the offline dashboard demo!
                 </div>

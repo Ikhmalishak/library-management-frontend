@@ -10,19 +10,7 @@ export async function login(email: string, password: string) {
       }
     );
     return result.data;
-  } catch (error: unknown) {
-    console.warn("Backend API offline, using mock authentication fallback.");
-    // Mock user for testing when backend is not running
-    if (email && password) {
-      return {
-        token: "mock-session-token",
-        user: {
-          name: "Alex Mercer",
-          email: email,
-          role: "Chief Librarian",
-        }
-      };
-    }
+  } catch (error: any) {
     throw error;
   }
 }
