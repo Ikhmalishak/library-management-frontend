@@ -66,7 +66,7 @@ export default function Navbar() {
           {/* User Profile Info */}
           <div className="flex items-center space-x-3 cursor-pointer group">
             <div className="w-9 h-9 rounded-full bg-purple-100 flex items-center justify-center text-purple-700 font-bold text-sm">
-              {user.name ? user.name.split(" ").map(n => n[0]).join("") : "U"}
+              {user.name ? user.name.split(" ").map((n: string) => n[0]).join("") : "U"}
             </div>
             <div className="hidden md:block text-left">
               <p className="text-xs font-semibold text-slate-800 group-hover:text-purple-600 transition-colors">

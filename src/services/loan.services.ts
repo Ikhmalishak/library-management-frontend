@@ -6,6 +6,7 @@ export async function getLoans(): Promise<Loan[]> {
         const result = await api.get("http://localhost:3000/api/loans/");
         return result.data.data;
     } catch (error) {
-        console.log(error.response.messages);
+        console.log(error);
+        throw error;
     }
 }

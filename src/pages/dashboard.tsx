@@ -11,7 +11,6 @@ import {
   BookOpen,
   Users,
   Clock,
-  Activity,
   CheckCircle2,
   AlertTriangle,
   BookMarked

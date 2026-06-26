@@ -8,5 +8,6 @@ export async function getDashboardStats(): Promise<DashboardStats> {
         return res.data;
     } catch (error) {
         console.log(error);
+        throw error;
     }
 }
