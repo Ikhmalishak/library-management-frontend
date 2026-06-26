@@ -3,7 +3,7 @@ import api from "./api";
 
 export async function getLoans(): Promise<Loan[]> {
     try {
-        const result = await api.get("http://localhost:3000/api/loans/");
+        const result = await api.get("/loans");
         return result.data.data;
     } catch (error) {
         console.log(error);

@@ -1,9 +1,9 @@
 import type { Book } from "@/types/book";
-import axios from "axios";
+import api from "./api";
 
-export async function getBooks(): Promise<Book[]>{
+export async function getBooks(): Promise<Book[]> {
     try {
-        const res = await axios.get("http://localhost:3000/api/books");
+        const res = await api.get("/books");
         return res.data.data;
     } catch (error) {
         console.log(error);

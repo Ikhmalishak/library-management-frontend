@@ -1,9 +1,9 @@
 import type { User } from "@/types/user";
-import axios from "axios";
+import api from "./api";
 
 export async function getUsers(): Promise<User[]> {
     try {
-        const res = await axios.get("http://localhost:3000/api/members");
+        const res = await api.get("/members");
         return res.data.data;
     } catch (error) {
         console.log(error);
